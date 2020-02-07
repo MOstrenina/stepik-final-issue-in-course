@@ -10,4 +10,3 @@ class LoginPageLocators():
     REGISTER_FORM = (By.ID, "register_form")
 
 
-
