@@ -15,7 +15,8 @@ class ProductPageLocators:
     PRODUCT_PRICE = (By.CLASS_NAME, "price_color")
     NAME_OF_PRODUCT = (By.CSS_SELECTOR, ".col-sm-6.product_main> h1")
     PRODUCT_IN_BASKET = (By.CSS_SELECTOR, "#messages > .alert:nth-child(1)")
-    PRODUCT_NAME_IN_BASKET = (By.CSS_SELECTOR, ".alert-success .alertinner strong")
-    SUMMARY_IN_BASKET = (By.CSS_SELECTOR, ".alert-info .alertinner strong")
+    BASKET_SUMMARY = (By.CSS_SELECTOR, "#messages > .alert:nth-child(3)")
+    PRODUCT_NAME_IN_BASKET = (By.CSS_SELECTOR, "#messages > .alert-success  > .alertinner  > strong")
+    PRODUCT_PRICE_IN_BASKET = (By.CSS_SELECTOR, ".alert-info .alertinner p strong")
 
 
