@@ -22,7 +22,7 @@ class ProductPage(BasePage):
 
     def product_should_be_added_to_basket(self):
         # проверить, что отображается блок с нотификациями о добавлении продукта в корзину
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_IN_BASKET), "Product is not added!"
+        assert self.is_element_present(*ProductPageLocators.MESSAGE_PRODUCT_IN_BASKET), "Product is not added!"
 
     def product_should_have_the_same_name(self):
         # проверить, что имя продукта равно имени продукта в корзине
@@ -35,4 +35,12 @@ class ProductPage(BasePage):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         basket_summary = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_BASKET).text
         assert product_price == basket_summary, "Prices of product are not equal!"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_PRODUCT_IN_BASKET), \
+            "Success message is presented, but should not be"
+
+    def message_should_be_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_PRODUCT_IN_BASKET), \
+            "Success message is presented, but wasn't disappeared!"
 
