@@ -28,3 +28,4 @@ class BasePageLocators:
 
 class BasketPageLocators:
     EMPTY_BASKET_MESSAGE = (By.CSS_SELECTOR, "#content_inner > p")
+    TABLE_WITH_PRODUCTS = (By.ID, "basket_formset")
