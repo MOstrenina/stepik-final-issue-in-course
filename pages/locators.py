@@ -16,12 +16,12 @@ class LoginPageLocators:
 
 class ProductPageLocators:
     ADD_TO_BASKET = (By.CLASS_NAME, "btn.btn-lg.btn-primary.btn-add-to-basket")
-    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
-    NAME_OF_PRODUCT = (By.CSS_SELECTOR, "div.product_main h1")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main > .price_color")
+    NAME_OF_PRODUCT = (By.CSS_SELECTOR, ".product_main > h1")
     MESSAGE_PRODUCT_IN_BASKET = (By.CSS_SELECTOR, "div.alertinner ")
     BASKET_SUMMARY = (By.CSS_SELECTOR, "#messages > .alert:nth-child(3)")
-    PRODUCT_NAME_IN_BASKET = (By.CSS_SELECTOR, ".alert-success .alertinner strong")
-    PRODUCT_PRICE_IN_BASKET = (By.CSS_SELECTOR, ".alert-info .alertinner strong")
+    PRODUCT_NAME_IN_BASKET = (By.CSS_SELECTOR, "#messages > :nth-child(1) strong")
+    PRODUCT_PRICE_IN_BASKET = (By.CSS_SELECTOR, "#messages > :nth-child(3) strong")
 
 
 class BasePageLocators:

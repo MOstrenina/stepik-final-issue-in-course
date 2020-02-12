@@ -9,10 +9,10 @@ from time import sleep
 from mimesis import Person  # с помощью этой библиотеки будем генерировать email и password
 
 
-@pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-@pytest.mark.last_bug
+@pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", pytest.param("7", marks=pytest.mark.xfail), "8", "9"])
+@pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser, link):
-    final_link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}/'
+    final_link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}'
     page = ProductPage(browser, final_link)
     page.open()
     page.should_be_add_to_basket_button()
@@ -22,8 +22,9 @@ def test_guest_can_add_product_to_basket(browser, link):
     page.solve_quiz_and_get_code()
     # time.sleep(2)
     page.product_should_be_added_to_basket()
-    page.product_should_have_the_same_name()
     page.item_price_should_be_the_same()
+    page.product_should_have_the_same_name()
+
 
 @pytest.mark.xfail(reason="message is required in this case")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
