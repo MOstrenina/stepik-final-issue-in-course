@@ -82,7 +82,7 @@ class TestUserAddToBasketFromProductPage:
     def setup(self, browser):
         login = Person()
         # генерируем логин и пароль с помощью методов класса Person библиотеки mimesis
-        email = login.email(domains=['gmail.com'])
+        email = login.email(domains=['@gmail.com'])
         password = login.password(length=9, hashed=False)
         link = "http://selenium1py.pythonanywhere.com"
         page = MainPage(browser, link)
