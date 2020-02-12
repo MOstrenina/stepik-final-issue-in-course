@@ -6,11 +6,11 @@ import pytest
 from mimesis import Person  # с помощью этой библиотеки будем генерировать email и password
 
 
-@pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", pytest.param("7", marks=pytest.mark.xfail), "8", "9"])
+# @pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", pytest.param("7", marks=pytest.mark.xfail), "8", "9"])
 @pytest.mark.need_review
-def test_guest_can_add_product_to_basket(browser, link):
-    final_link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}'
-    page = ProductPage(browser, final_link)
+def test_guest_can_add_product_to_basket(browser):
+    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
+    page = ProductPage(browser, link)
     page.open()
     page.should_be_add_to_basket_button()
     page.should_be_name_of_product()
