@@ -9,20 +9,21 @@ from time import sleep
 from mimesis import Person  # с помощью этой библиотеки будем генерировать email и password
 
 
-# @pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
-# def test_guest_can_add_product_to_basket(browser, link):
-#     final_link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}/'
-#     page = ProductPage(browser, final_link)
-#     page.open()
-#     page.should_be_add_to_basket_button()
-#     page.should_be_name_of_product()
-#     page.should_be_product_price()
-#     page.should_be_add_product_to_basket()
-#     page.solve_quiz_and_get_code()
-#     time.sleep(2)
-#     page.product_should_be_added_to_basket()
-#     page.product_should_have_the_same_name()
-#     page.basket_summary_should_not_have_null()
+@pytest.mark.parametrize('link', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
+@pytest.mark.last_bug
+def test_guest_can_add_product_to_basket(browser, link):
+    final_link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{link}/'
+    page = ProductPage(browser, final_link)
+    page.open()
+    page.should_be_add_to_basket_button()
+    page.should_be_name_of_product()
+    page.should_be_product_price()
+    page.should_be_add_product_to_basket()
+    page.solve_quiz_and_get_code()
+    # time.sleep(2)
+    page.product_should_be_added_to_basket()
+    page.product_should_have_the_same_name()
+    page.item_price_should_be_the_same()
 
 @pytest.mark.xfail(reason="message is required in this case")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
@@ -57,14 +58,14 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.open()
     page.should_be_login_link()
 
-
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
 
-
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     page = ProductPage(browser, link)
@@ -76,7 +77,6 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page.should_be_message_empty_basket()
 
 
-@pytest.mark.logged_user  # для отладки тестов или же если нужно запустить только тесты для залогиненного пользователя
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
     # регистрация пользователя
@@ -93,14 +93,7 @@ class TestUserAddToBasketFromProductPage:
         login_page.register_new_user()
         login_page.should_be_authorized_user()
 
-    def test_user_cant_see_success_message_after_adding_product_to_basket(self, browser):
-        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
-        page = ProductPage(browser, link)
-        page.open()
-        page.should_be_add_to_basket_button()
-        page.should_be_add_product_to_basket()
-        page.should_not_be_success_message()
-
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         page = ProductPage(browser, link)
@@ -111,7 +104,15 @@ class TestUserAddToBasketFromProductPage:
         page.should_be_add_product_to_basket()
         page.product_should_be_added_to_basket()
         page.product_should_have_the_same_name()
-        page.basket_summary_should_not_have_null()
+        page.item_price_should_be_the_same()
+
+    def test_user_cant_see_success_message_after_adding_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_be_add_to_basket_button()
+        page.should_be_add_product_to_basket()
+        page.should_not_be_success_message()
 
 
 

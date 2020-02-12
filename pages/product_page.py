@@ -30,7 +30,7 @@ class ProductPage(BasePage):
         name_in_basket = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_IN_BASKET).text
         assert name_before_basket == name_in_basket, "Names of product are not equal!"
 
-    def basket_summary_should_not_have_null(self):
+    def item_price_should_be_the_same(self):
         # проверка соответствия цены продукта сумме товаров в корзине
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         basket_summary = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_IN_BASKET).text
